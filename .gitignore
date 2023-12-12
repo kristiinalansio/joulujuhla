@@ -1,0 +1,8 @@
+*
+!/docs
+!/docs/**
+!/.cljfmt.edn
+!/.gitignore
+!/bb.edn
+!/video-template.html
+!/*.png

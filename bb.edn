@@ -1,0 +1,69 @@
+{:paths ["bb"]
+ :deps  {}
+ :tasks {process-videos {:doc      "Process videos"
+                         :requires ([clojure.string :as str]
+                                    [babashka.fs :as fs]
+                                    [babashka.process :as p])
+                         :task     (let [rand-strs (->> (range (int \a) (inc (int \z)))
+                                                        (mapv (fn [v] (char v))))
+                                         rand-str  (fn [] (apply str (repeatedly 8 (fn [] (rand-nth rand-strs)))))]
+                                     (->> (fs/glob "videos" "*.mp4")
+                                          (map str)
+                                          (sort)
+                                          (map-indexed (fn [n source]
+                                                         (let [base-name (str "./docs/v/" (inc n) "-" (rand-str))
+                                                               mp4       (str base-name ".mp4")
+                                                               webm      (str base-name ".webm")]
+                                                           (println "\n\n==== processing" source)
+                                                           (fs/copy source mp4)
+                                                           (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null" mp4))
+                                                           (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 2 %s" mp4 webm)))))
+                                          (dorun)))}
+
+         generate-html  {:doc      "Generate html pages for each video"
+                         :requires ([clojure.string :as str]
+                                    [babashka.fs :as fs]
+                                    [babashka.process :as p])
+                         :task     (let [template (slurp "video-template.html")]
+                                     (->> (fs/glob "docs/v" "*.webm")
+                                          (map (fn [f]
+                                                 (let [[m base] (re-matches (re-pattern "docs/v/(.*)\\.webm") (str f))
+                                                       html     (str "docs/" base ".html")
+                                                       webm     (str "v/" base ".webm")
+                                                       mp4      (str "v/" base ".mp4")]
+                                                   (->> (str/replace template
+                                                                     (re-pattern "\\$([^$]+)\\$")
+                                                                     (comp {"video-webm" webm
+                                                                            "video-mp4"  mp4}
+                                                                           second))
+                                                        (spit html)))))
+                                          (dorun)))}
+
+         generate-qr    {:doc      "Generate QR coder for video pages"
+                         :requires ([clojure.string :as str]
+                                    [babashka.fs :as fs]
+                                    [babashka.process :as p])
+                         :task     (->> (fs/glob "docs" "*.html")
+                                        (map (fn [f]
+                                               (let [[_ n f] (re-matches (re-pattern "docs/(\\d)-(.*\\.html)") (str f))
+                                                     html    (str "https://kristiinalansio.github.io/joulujuhla/" n "-" f)
+                                                     qr-f    (str "./" n ".png")]
+                                                 (p/shell (format "qrencode -o %s %s" qr-f html)))))
+                                        (dorun))}}}
+
+
+(comment
+  (let [template (slurp "video-template.html")]
+    (-> (slurp "video-template.html")
+        (clojure.string/replace (re-pattern "\\$([^$]+)\\$") (comp {"video-webm" "WEBM"
+                                                                    "video-mp4"  "MP4"}
+                                                                   second))
+        (spit "./docs/1-video.html")))
+
+  (->> (fs/glob "docs/v" "*.webm")
+       (map (fn [f]
+              (let [[m base] (re-matches (re-pattern "docs/v/(.*)\\.webm") (str f))
+                    html     (str "docs/" base ".html")
+                    webm     (str "v/" base ".webm")
+                    mp4      (str "v/" base ".mp4")]
+                (println html webm))))))
