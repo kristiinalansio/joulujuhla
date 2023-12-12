@@ -4,5 +4,6 @@
 !/.cljfmt.edn
 !/.gitignore
 !/bb.edn
+!/README.md
 !/video-template.html
 !/*.png
