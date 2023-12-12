@@ -47,7 +47,7 @@
                                          (map (fn [f]
                                                 (let [[_ n f] (re-matches (re-pattern "docs/(\\d)-(.*\\.html)") (str f))
                                                       html    (str "https://kristiinalansio.github.io/joulujuhla/" n "-" f)
-                                                      qr-f    (str "./" n ".png")]
+                                                      qr-f    (str "./docs/" n ".png")]
                                                   (p/shell (format "qrencode -o %s %s" qr-f html)))))
                                          (dorun))}
 
@@ -64,13 +64,14 @@
                                            (sort-by str)
                                            (map (fn [f]
                                                   (let [[_ n f] (re-matches (re-pattern "docs/(\\d)-(.*\\.html)") (str f))
-                                                        qr-f    (str "./" n ".png")]
+                                                        qr      (str "https://kristiinalansio.github.io/joulujuhla/" n ".png")
+                                                        html    (str "https://kristiinalansio.github.io/joulujuhla/" n "-" f)]
                                                     (doto out
                                                       (.println (format "## Osa %s" n))
                                                       (.println)
-                                                      (.println (format "![Osa %1$s QR code](./%1$s.png)" n))
-                                                      (.println (format "[Lataa QR](./%s.png)" n))
-                                                      (.println (format "[Video](./docs/%s-%s)" n f))
+                                                      (.println (format "![QR code](%s)" qr))
+                                                      (.println (format "[Lataa QR](%s)" qr))
+                                                      (.println (format "[Video](%s)" html))
                                                       (.println)))))
                                            (dorun))
                                       (doto out
