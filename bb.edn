@@ -70,8 +70,9 @@
                                                       (.println (format "## Osa %s" n))
                                                       (.println)
                                                       (.println (format "![QR code](%s)" qr))
-                                                      (.println (format "[Lataa QR](%s)" qr))
-                                                      (.println (format "[Video](%s)" html))
+                                                      (.println)
+                                                      (.println (format "- [Lataa QR](%s)" qr))
+                                                      (.println (format "- [Video](%s)" html))
                                                       (.println)))))
                                            (dorun))
                                       (doto out
