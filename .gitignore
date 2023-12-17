@@ -6,4 +6,5 @@
 !/bb.edn
 !/README.md
 !/video-template.html
-!/*.png
+
+.DS_Store
