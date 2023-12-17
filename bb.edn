@@ -7,7 +7,7 @@
                           :task     (let [rand-strs (->> (range (int \a) (inc (int \z)))
                                                          (mapv (fn [v] (char v))))
                                           rand-str  (fn [] (apply str (repeatedly 8 (fn [] (rand-nth rand-strs)))))]
-                                      (->> (fs/glob "videos" "*.MOV")
+                                      (->> (fs/glob "videos" "IMG_*.mp4")
                                            (map str)
                                            (sort)
                                            (map-indexed (fn [n source]
@@ -15,7 +15,7 @@
                                                                 mp4       (str base-name ".mp4")
                                                                 webm      (str base-name ".webm")]
                                                             (println "\n\n==== processing" source)
-                                                            (p/shell (format "ffmpeg -i %s -q:v 0 %s" source mp4))
+                                                            (fs/copy source mp4)
                                                             (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null" source))
                                                             (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 2 %s" source webm)))))
                                            (dorun)))}
