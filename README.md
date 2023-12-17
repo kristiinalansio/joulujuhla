@@ -33,42 +33,21 @@
 ![QR code](https://kristiinalansio.github.io/joulujuhla/5.png)
 
 - [Lataa QR](https://kristiinalansio.github.io/joulujuhla/5.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/5-efsvegti.html)
-
-## Osa 5
-
-![QR code](https://kristiinalansio.github.io/joulujuhla/5.png)
-
-- [Lataa QR](https://kristiinalansio.github.io/joulujuhla/5.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/5-gehdmtrd.html)
+- [Video](https://kristiinalansio.github.io/joulujuhla/5-bhgcqlku.html)
 
 ## Osa 6
 
 ![QR code](https://kristiinalansio.github.io/joulujuhla/6.png)
 
 - [Lataa QR](https://kristiinalansio.github.io/joulujuhla/6.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/6-khjkahdv.html)
-
-## Osa 6
-
-![QR code](https://kristiinalansio.github.io/joulujuhla/6.png)
-
-- [Lataa QR](https://kristiinalansio.github.io/joulujuhla/6.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/6-vfllptbt.html)
+- [Video](https://kristiinalansio.github.io/joulujuhla/6-zehcmurz.html)
 
 ## Osa 7
 
 ![QR code](https://kristiinalansio.github.io/joulujuhla/7.png)
 
 - [Lataa QR](https://kristiinalansio.github.io/joulujuhla/7.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/7-kjiotzuh.html)
-
-## Osa 7
-
-![QR code](https://kristiinalansio.github.io/joulujuhla/7.png)
-
-- [Lataa QR](https://kristiinalansio.github.io/joulujuhla/7.png)
-- [Video](https://kristiinalansio.github.io/joulujuhla/7-rzuhclul.html)
+- [Video](https://kristiinalansio.github.io/joulujuhla/7-ypnazfcw.html)
 
 ## Osa 8
 

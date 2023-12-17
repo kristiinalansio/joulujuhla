@@ -11,13 +11,14 @@
                                            (map str)
                                            (sort)
                                            (map-indexed (fn [n source]
-                                                          (let [base-name (str "./docs/v/" (+ n 5) "-" (rand-str))
+                                                          (let [base-name (str "./docs/v/" (+ n 7) "-" (rand-str))
                                                                 mp4       (str base-name ".mp4")
                                                                 webm      (str base-name ".webm")]
                                                             (println "\n\n==== processing" source)
-                                                            (fs/copy source mp4)
-                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null" source))
-                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 2 %s" source webm)))))
+                                                            (p/shell (format "ffmpeg -i %s -b:v 64k -b:a 48k -crf 30 %s" source mp4))
+                                                            (fs/delete-if-exists "ffmpeg2pass-0.log")
+                                                            (p/shell (format "ffmpeg -i %s -b:v 128k -b:a 48k -crf 30 -pass 1 -an -f webm -y /dev/null" source))
+                                                            (p/shell (format "ffmpeg -i %s -b:v 128k -b:a 48k -crf 30 -pass 2 %s" source webm)))))
                                            (dorun)))}
 
          generate-html   {:doc      "Generate html pages for each video"
