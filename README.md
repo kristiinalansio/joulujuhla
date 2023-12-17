@@ -49,3 +49,17 @@
 - [Lataa QR](https://kristiinalansio.github.io/joulujuhla/7.png)
 - [Video](https://kristiinalansio.github.io/joulujuhla/7-kjiotzuh.html)
 
+## Osa 8
+
+![QR code](https://kristiinalansio.github.io/joulujuhla/8.png)
+
+- [Lataa QR](https://kristiinalansio.github.io/joulujuhla/8.png)
+- [Video](https://kristiinalansio.github.io/joulujuhla/8-skkwsjjs.html)
+
+## Osa 9
+
+![QR code](https://kristiinalansio.github.io/joulujuhla/9.png)
+
+- [Lataa QR](https://kristiinalansio.github.io/joulujuhla/9.png)
+- [Video](https://kristiinalansio.github.io/joulujuhla/9-qwertyui.html)
+
