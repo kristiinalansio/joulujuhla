@@ -7,17 +7,17 @@
                           :task     (let [rand-strs (->> (range (int \a) (inc (int \z)))
                                                          (mapv (fn [v] (char v))))
                                           rand-str  (fn [] (apply str (repeatedly 8 (fn [] (rand-nth rand-strs)))))]
-                                      (->> (fs/glob "videos" "*.mp4")
+                                      (->> (fs/glob "videos" "*.MOV")
                                            (map str)
                                            (sort)
                                            (map-indexed (fn [n source]
-                                                          (let [base-name (str "./docs/v/" (inc n) "-" (rand-str))
+                                                          (let [base-name (str "./docs/v/" (+ n 5) "-" (rand-str))
                                                                 mp4       (str base-name ".mp4")
                                                                 webm      (str base-name ".webm")]
                                                             (println "\n\n==== processing" source)
-                                                            (fs/copy source mp4)
-                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null" mp4))
-                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 2 %s" mp4 webm)))))
+                                                            (p/shell (format "ffmpeg -i %s -q:v 0 %s" source mp4))
+                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 1 -an -f webm -y /dev/null" source))
+                                                            (p/shell (format "ffmpeg -i %s -b:v 0 -crf 30 -pass 2 %s" source webm)))))
                                            (dorun)))}
 
          generate-html   {:doc      "Generate html pages for each video"
@@ -81,6 +81,9 @@
 
 
 (comment
+
+
+
   (let [template (slurp "video-template.html")]
     (-> (slurp "video-template.html")
         (clojure.string/replace (re-pattern "\\$([^$]+)\\$") (comp {"video-webm" "WEBM"
